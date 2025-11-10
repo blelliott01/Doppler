@@ -1,0 +1,14 @@
+/Users/lee/GitHub/Doppler/bin/Debug/net9.0/Doppler
+/Users/lee/GitHub/Doppler/bin/Debug/net9.0/Doppler.deps.json
+/Users/lee/GitHub/Doppler/bin/Debug/net9.0/Doppler.runtimeconfig.json
+/Users/lee/GitHub/Doppler/bin/Debug/net9.0/Doppler.dll
+/Users/lee/GitHub/Doppler/bin/Debug/net9.0/Doppler.pdb
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.GeneratedMSBuildEditorConfig.editorconfig
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.AssemblyInfoInputs.cache
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.AssemblyInfo.cs
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.csproj.CoreCompileInputs.cache
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.dll
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/refint/Doppler.dll
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.pdb
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/Doppler.genruntimeconfig.cache
+/Users/lee/GitHub/Doppler/obj/Debug/net9.0/ref/Doppler.dll
