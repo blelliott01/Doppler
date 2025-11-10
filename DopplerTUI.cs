@@ -1,67 +1,70 @@
 using Terminal.Gui;
-using System;
 
 namespace Doppler
 {
     public static class DopplerTUI
     {
+        private static readonly string[] sourceArray = [
+                "_ New", "_ Singles", "_ Comps", "A", "B", "C", "#"
+            ];
+
         public static void Run()
         {
             Application.Init();
-            var top = Application.Top;
+            Toplevel top = Application.Top;
 
             // === Menu Bar ===
-            var menu = new MenuBar(new MenuBarItem[] {
-                new MenuBarItem("_File", new MenuItem[] {
-                    new MenuItem("_Open Library...", "Open Doppler library folder",
+            MenuBar menu = new([
+                new("_File", new MenuItem[] {
+                    new("_Open Library...", "Open Doppler library folder",
                         () => MessageBox.Query("Open", "Library opened.", "OK")),
-                    new MenuItem("_Exit", "Exit Doppler", () => Application.RequestStop())
+                    new("_Exit", "Exit Doppler", () => Application.RequestStop())
                 }),
-                new MenuBarItem("_Tools", new MenuItem[] {
-                    new MenuItem("_Scan", "Scan music library",
+                new("_Tools", new MenuItem[] {
+                    new("_Scan", "Scan music library",
                         () => MessageBox.Query("Scan", "Scanning complete.", "OK")),
-                    new MenuItem("_Validate", "Check for missing tracks",
+                    new("_Validate", "Check for missing tracks",
                         () => MessageBox.Query("Validate", "Validation complete.", "OK"))
                 }),
-                new MenuBarItem("_Reports", new MenuItem[] {
-                    new MenuItem("_Summary", "Show summary report",
+                new("_Reports", new MenuItem[] {
+                    new("_Summary", "Show summary report",
                         () => MessageBox.Query("Summary", "Albums: 127\nSingles: 384", "OK"))
                 }),
-                new MenuBarItem("_Help", new MenuItem[] {
-                    new MenuItem("_About", "", () => MessageBox.Query("About", "Doppler TUI\nInspired by ZIM", "OK"))
+                new("_Help", new MenuItem[] {
+                    new("_About", "", () => MessageBox.Query("About", "Doppler TUI\nInspired by ZIM", "OK"))
                 })
-            });
+            ]);
             top.Add(menu);
 
             // === Main Window ===
-            var win = new Window("Doppler Library Manager")
+            Window win = new("Doppler Library Manager")
             {
-                X = 0, Y = 1,
+                X = 0,
+                Y = 1,
                 Width = Dim.Fill(),
                 Height = Dim.Fill() - 1
             };
 
             // Left Pane
-            var leftPane = new FrameView("Folders")
+            FrameView leftPane = new("Folders")
             {
-                X = 0, Y = 0,
+                X = 0,
+                Y = 0,
                 Width = Dim.Percent(40),
                 Height = Dim.Fill()
             };
-            var folderList = new ListView(new string[] {
-                "_ New", "_ Singles", "_ Comps", "A", "B", "C", "#"
-            });
+            ListView folderList = new(sourceArray);
             leftPane.Add(folderList);
 
             // Right Pane
-            var rightPane = new FrameView("Track Information")
+            FrameView rightPane = new("Track Information")
             {
                 X = Pos.Right(leftPane),
                 Y = 0,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
-            var info = new TextView()
+            TextView info = new()
             {
                 ReadOnly = true,
                 Text = "Artist: Flamin’ Groovies\nAlbum: Shake Some Action\nTrack: 03\nTitle: You Tore Me Down\nYear: 1976"
@@ -72,15 +75,15 @@ namespace Doppler
             top.Add(win);
 
             // === Status Bar ===
-            var status = new StatusBar(new StatusItem[] {
-                new StatusItem(Key.F1, "~F1~ Help", () =>
+            StatusBar status = new([
+                new(Key.F1, "~F1~ Help", () =>
                     MessageBox.Query("Help", "Use arrow keys to move\nEnter to select\nF9 to quit", "OK")),
-                new StatusItem(Key.F3, "~F3~ Edit", () =>
+                new(Key.F3, "~F3~ Edit", () =>
                     MessageBox.Query("Edit", "Editing not implemented.", "OK")),
-                new StatusItem(Key.F5, "~F5~ Refresh", () =>
+                new(Key.F5, "~F5~ Refresh", () =>
                     MessageBox.Query("Refresh", "Screen refreshed.", "OK")),
-                new StatusItem(Key.F9, "~F9~ Quit", () => Application.RequestStop())
-            });
+                new(Key.F9, "~F9~ Quit", () => Application.RequestStop())
+            ]);
             top.Add(status);
 
             Application.Run();
