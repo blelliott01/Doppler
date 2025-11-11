@@ -1,4 +1,4 @@
-namespace Doppler.Data.Disc
+namespace Doppler.Data.Files
 {
     public class Track
     {

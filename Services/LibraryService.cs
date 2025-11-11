@@ -9,7 +9,7 @@ namespace Doppler.Services
 
         public async Task SyncAsync(string rootPath)
         {
-            IEnumerable<Data.Disc.Artist> artists = await _provider.LoadLibraryAsync(rootPath);
+            IEnumerable<Data.Files.Artist> artists = await _provider.LoadLibraryAsync(rootPath);
             await _repository.SaveLibraryAsync(artists);
         }
     }
