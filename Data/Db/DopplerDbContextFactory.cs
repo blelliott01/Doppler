@@ -8,7 +8,7 @@ namespace Doppler.Data.Db
         public DopplerDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DopplerDbContext>();
-            optionsBuilder.UseSqlite("Data Source=doppler.db");
+            _ = optionsBuilder.UseSqlite("Data Source=doppler.db");
             return new DopplerDbContext(optionsBuilder.Options);
         }
     }

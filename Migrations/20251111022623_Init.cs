@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -11,7 +12,7 @@ namespace Doppler.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "MediaFiles",
                 columns: table => new
                 {
@@ -23,10 +24,10 @@ namespace Doppler.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MediaFiles", x => x.Id);
+                    _ = table.PrimaryKey("PK_MediaFiles", x => x.Id);
                 });
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_MediaFiles_Path",
                 table: "MediaFiles",
                 column: "Path",
@@ -36,7 +37,7 @@ namespace Doppler.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "MediaFiles");
         }
     }

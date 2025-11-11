@@ -15,3 +15,9 @@ dotnet_diagnostic.IDE0005.severity = warning
 
 # --- Code style severity ---
 dotnet_analyzer_diagnostic.severity = warning
+
+# --- Errors ---
+dotnet_diagnostic.CA1848.severity = none
+
+dotnet_diagnostic.IDE0008.severity = none
+
