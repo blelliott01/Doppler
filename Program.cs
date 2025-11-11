@@ -9,30 +9,48 @@ using Doppler.Data.Files;
 using Doppler.Services;
 using Doppler.Data.Interfaces;
 
+// Parse command-line args early
+bool verbose = args.Contains("--verbose");
+
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        // EF Core with SQLite
-        _ = services.AddDbContext<DopplerDbContext>(options =>
+        // 1️⃣ Register settings first
+        services.AddSingleton(new DopplerSettings(verbose));
+
+        // 2️⃣ EF Core
+        services.AddDbContext<DopplerDbContext>(options =>
             options.UseSqlite("Data Source=doppler.db"));
 
-        // Doppler components
-        _ = services.AddScoped<ILibraryRepository, DopplerDbContext>();
-        _ = services.AddScoped<ILibraryProvider, FileContext>();
-        _ = services.AddScoped<LibraryService>();
+        // 3️⃣ Doppler components
+        services.AddScoped<ILibraryRepository, DopplerDbContext>();
+        services.AddScoped<ILibraryProvider, FileContext>();
+        services.AddScoped<LibraryService>();
 
         // Logging
-        _ = services.AddLogging(config =>
+        services.AddLogging(config =>
         {
-            _ = config.ClearProviders();
-            _ = config.AddSimpleConsole(options =>
+            config.ClearProviders();
+            config.AddSimpleConsole(options =>
             {
                 options.SingleLine = true;
                 options.TimestampFormat = "[HH:mm:ss] ";
             });
 
-            _ = config.SetMinimumLevel(LogLevel.Information);
-            _ = config.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.Warning);
+            // Default level
+            config.SetMinimumLevel(verbose ? LogLevel.Debug : LogLevel.Information);
+
+            if (verbose)
+            {
+                // In verbose mode, show everything including EF Core SQL
+                config.AddFilter("Microsoft", LogLevel.Debug);
+            }
+            else
+            {
+                // Quiet mode: suppress EF and framework chatter
+                config.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.Warning);
+                config.AddFilter("Microsoft.Hosting", LogLevel.Warning);
+            }
         });
     })
     .Build();
